@@ -76,6 +76,14 @@ if err != nil{
 C.trampoline = (*C.HOOKEDFUNC)(unsafe.Pointer(trampolineFunc))
 ~~~
 
+## Examples
+
+I have put together examples that can be used as templates:
+
+### deletefile
+
+This example hooks into the `DeleteFileW` function used by `KernelBase`. This was chosen over `kernel32` as this one simply forwards the call there anyway and there was an appropriate location to install the hook 5 bytes after the function address. The main program is a simple Go program that creates a file and then deletes it, with the hook installed it's possible to monitor when the process performs file deletions.
+
 ## Debugging
 
 As this can require a bit of knowledge of address locations and instructions being written into memory there is a `winhook.DebugEnabled` flag that can be enabled that will provide diagnostic information in Message Boxes and hopefully help track down why something is not working.
