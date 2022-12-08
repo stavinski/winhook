@@ -2,7 +2,7 @@
 
 ## Background
 
-This package came about after looking into performing inline hooking and reading some great material on the subject and also watching several videos on how it is performed in C/C++. What I tended to find was that alot focused on 32bit rather than 64bit and lets be honest when was the last time you worked with a 32bit OS! 
+This package came about after looking into performing inline hooking and reading some great material on the subject and also watching several videos on how it is performed in C/C++. What I tended to find was that alot focused on 32bit rather than 64bit and lets be honest when was the last time you worked with 32bit architecture! 
 
 Finally I found a fantastic article http://kylehalladay.com/blog/2020/11/13/Hooking-By-Example.html which went through from a simple hook but destructive right through to making a generic hook in 64bit without destroying the original hooked function.
 
