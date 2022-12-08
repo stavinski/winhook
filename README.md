@@ -2,11 +2,11 @@
 
 ## Background
 
-This package came about after looking into performing inline hooking and reading some great material on the subject and also watching several videos on how it is performed in C/C++. What I tended to find was that alot focused on 32bit rather than 64bit and lets be honest when was the last time you worked with 32bit architecture! 
+This module came about after looking into performing inline hooking and reading some great material on the subject and also watching several videos on how it is performed in C/C++. What I tended to find was that alot focused on 32bit rather than 64bit and lets be honest when was the last time you worked with 32bit architecture! 
 
 Finally I found a fantastic article http://kylehalladay.com/blog/2020/11/13/Hooking-By-Example.html which went through from a simple hook but destructive right through to making a generic hook in 64bit without destroying the original hooked function.
 
-Having this in C/C++ is good however it would be great to be able to have this option and be able to write it in Go to have all the available standard libs available, cross compilation and a single deployed executable not too mention the other numerous reasons using Go for malicous deployments is a [great](https://www.youtube.com/watch?v=3RQb05ITSyk) [option](https://www.youtube.com/watch?v=AGLunpPtOgM). I had a good look round to see if anyone else had written any Go package to perform this but was out of luck either they wrapped other hooking libs or used the [SetWindowsHookEx](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa) which allows certain events to be hooked such as mouse, keyboard but is very limited.
+Having this in C/C++ is good however it would be great to be able to have this option and be able to write it in Go to have all the available standard libs available, cross compilation and a single deployed executable not too mention the other numerous reasons using Go for malicous deployments is a [great](https://www.youtube.com/watch?v=3RQb05ITSyk) [option](https://www.youtube.com/watch?v=AGLunpPtOgM). I had a good look round to see if anyone else had written any Go module to perform this but was out of luck either they wrapped other hooking libs or used the [SetWindowsHookEx](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa) which allows certain events to be hooked such as mouse, keyboard but is very limited.
 
 So fast forward and I managed to find a workable solution written mostly in Go but with some interop pieces requiring C. If anyone is able to point me in the right direction on how to make it work 100% Go I'm all ears!
 
