@@ -54,6 +54,7 @@ const (
 	MIN_STEAL_LEN         = 5
 	MAX_STEAL_LEN         = 32
 	x64_ABS_JMP_INSTR_LEN = 13
+	x64_REL_JMP_INSTR_LEN = 5
 )
 
 // Enable to help with diagnosing issues, writes debug info in messageboxes
@@ -203,7 +204,7 @@ func createTrampolineFunc(hookedFunc uintptr, stealLength int) (uintptr, error) 
 func writeRelativeJmp(hookedFunc, relayFunc uintptr, stealLength int) error {
 	// create NOP instructions
 	relJmpInstructions := bytes.Repeat([]byte{0x90}, stealLength)
-	relJmpAddr := relayFunc - hookedFunc - uintptr(stealLength)
+	relJmpAddr := relayFunc - hookedFunc - uintptr(x64_REL_JMP_INSTR_LEN)
 	// place the jmp instruction at the start
 	relJmpInstructions[0] = 0xE9
 
