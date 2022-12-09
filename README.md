@@ -82,7 +82,12 @@ I have put together examples that can be used as templates:
 
 ### deletefile
 
-This example hooks into the `DeleteFileW` function used by `KernelBase`. This was chosen over `kernel32` as this one simply forwards the call there anyway and there was an appropriate location to install the hook 5 bytes after the function address. The main program is a simple Go program that creates a file and then deletes it, with the hook installed it's possible to monitor when the process performs file deletions.
+Hooks into the `DeleteFileW` function provided by `KernelBase`. This was chosen over `kernel32` as this one simply forwards the call there anyway and there was an appropriate location to install the hook 5 bytes after the function address. The main program is a simple Go program that creates a file and then deletes it, with the hook installed it's possible to monitor when the process performs file deletions.
+
+
+### username
+
+Hooks into the `GetUserNameW` function provided by `advapi32`. Instead of just monitoring this example uses the payload function in Go to change the current username returned by this call. This example is rather contrived but demonstrates how manipulation of the calls is possible so could be used for instance to hide information from the user or mislead.
 
 ## Debugging
 
