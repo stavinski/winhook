@@ -1,4 +1,2 @@
-github.com/nanitefactory/winmb v0.0.0-20180925155445-5e2e64af6db7 h1:5XmHUHJoVNj6HlAFaFJvlLkoQmmPFNipgpXVje/9un4=
-github.com/nanitefactory/winmb v0.0.0-20180925155445-5e2e64af6db7/go.mod h1:bsaMzdte82lYR7sJL+AUQED7AcCMtk28o7U0+DtzI5U=
 golang.org/x/sys v0.2.0 h1:ljd4t30dBnAvMZaQCevtY0xLLD0A+bRZXbgLMLU1F/A=
 golang.org/x/sys v0.2.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=

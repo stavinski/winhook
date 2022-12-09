@@ -44,11 +44,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/nanitefactory/winmb"
+	"github.com/stavinski/winhook/winsys"
 	"golang.org/x/sys/windows"
 )
 
-//go:generate go run golang.org/x/sys/windows/mkwinsyscall -output zsyscall_windows.go syscall_windows.go
+//go:generate go run golang.org/x/sys/windows/mkwinsyscall -output winsys/zsyscall_windows.go winsys/syscall_windows.go
 
 const (
 	MIN_STEAL_LEN         = 5
@@ -63,7 +63,11 @@ var DebugEnabled = false
 // write to messagebox if DebugEnabled is turned on
 func writeDebug(val string) {
 	if DebugEnabled {
-		winmb.MessageBoxPlain("~~Winhook Debug~~", val)
+		cap, _ := windows.UTF16PtrFromString("~~Winhook Debug~~")
+		msg, err := windows.UTF16PtrFromString(val)
+		if err == nil {
+			windows.MessageBox(0, msg, cap, 0)
+		}
 	}
 }
 
@@ -82,13 +86,13 @@ func maxUint64(fst, snd uint64) uint64 {
 
 // Finds and allocates a memory page close to the provided targetAddr
 func allocatePageNearAddress(targetAddr uintptr) (uintptr, error) {
-	info := LPSYSTEM_INFO{}
-	GetSystemInfo(&info)
-	pageSize := uint64(info.dwPageSize)
+	info := winsys.LPSYSTEM_INFO{}
+	winsys.GetSystemInfo(&info)
+	pageSize := uint64(info.DwPageSize)
 
 	startAddr := uint64(targetAddr) & ^(pageSize - 1) //round down to nearest page boundary
-	minAddr := minUint64(startAddr-0x7FFFFF00, uint64(info.lpMinimumApplicationAddress))
-	maxAddr := maxUint64(startAddr+0x7FFFFF00, uint64(info.lpMaximumApplicationAddress))
+	minAddr := minUint64(startAddr-0x7FFFFF00, uint64(info.LpMinimumApplicationAddress))
+	maxAddr := maxUint64(startAddr+0x7FFFFF00, uint64(info.LpMaximumApplicationAddress))
 	startPage := (startAddr - (startAddr % pageSize))
 
 	writeDebug(fmt.Sprintf("startAddr: 0x%x", startAddr))
