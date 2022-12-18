@@ -145,7 +145,7 @@ func writeAbsJmp64(writeAddr, jmpToAddr uintptr) error {
 	}
 	// place the to addr bytes after the movabs abs instruction
 	binary.LittleEndian.PutUint64(x64JmpInstr[2:], uint64(jmpToAddr))
-	writeDebug(fmt.Sprintf("x64 abs instructions: %v", x64JmpInstr))
+	writeDebug(fmt.Sprintf("x64 abs instructions: %x", x64JmpInstr))
 	// write the jmp instructions into the writeAddr
 	return windows.WriteProcessMemory(windows.CurrentProcess(), writeAddr, &x64JmpInstr[0], uintptr(len(x64JmpInstr)), &bytesWritten)
 }
@@ -214,7 +214,7 @@ func writeRelativeJmp(hookedFunc, relayFunc uintptr, stealLength int) error {
 
 	// write the relJmpAddr address into the instructions
 	binary.LittleEndian.PutUint32(relJmpInstructions[1:], uint32(relJmpAddr))
-	writeDebug(fmt.Sprintf("Relative jmp instructions: %v", relJmpInstructions))
+	writeDebug(fmt.Sprintf("Relative jmp instructions: %x", relJmpInstructions))
 
 	oldProtect := uint32(0)
 	// set the hookedFunc memory to be writeable
